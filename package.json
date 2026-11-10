@@ -1,0 +1,25 @@
+{
+  "name": "teams-ic3",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "teams-ic3": "./index.ts"
+  },
+  "scripts": {
+    "dev": "bun run index.ts",
+    "build": "bun build index.ts --compile --outfile teams-ic3",
+    "start": "./teams-ic3",
+    "test": "bun test",
+    "deploy-skill": "bun run build && cp teams-ic3 \"$HOME/.pi/agent/skills/teams-ic3/teams-ic3\" && cp SKILL.md \"$HOME/.pi/agent/skills/teams-ic3/SKILL.md\""
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+
+  }
+}

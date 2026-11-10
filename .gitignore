@@ -1,0 +1,8 @@
+# Dependencies and compiled binary
+node_modules/
+/teams-ic3
+
+# Local credentials and configuration
+.env
+.env.*
+token-ic3.txt
