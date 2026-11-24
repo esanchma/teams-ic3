@@ -32,4 +32,6 @@ This does not guarantee a permanent session: Edge and Teams must be able to gene
 
 In `edge://extensions`, open the Teams IC3 **service worker** to see status messages. If the token is not saved, check the registered ID, the executable path, and that Teams is authenticated. Reload Teams or open a chat to generate another request. `auth-status --check` checks the cached token; an older cache may still exist even if the extension fails.
 
+If Microsoft API requests require a proxy, set `HTTPS_PROXY` and any `NO_PROXY` or `NODE_EXTRA_CA_CERTS` values in Edge's launch environment. The native host inherits Edge's environment, not the environment of a separate terminal. See the root [README](../README.md#proxy).
+
 The token is a credential. The extension sends it only to the local native host; it does not print or store the token itself. Do not share tokens or screenshots containing them. If a credential has been exposed, follow your organization's revocation procedure.

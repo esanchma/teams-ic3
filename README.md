@@ -48,6 +48,20 @@ Edge launches the host with the extension origin as an argument. Running `teams-
 
 The native messaging protocol uses UTF-8 JSON with a 4-byte length in native byte order. The host accepts `{"ic3":"<token>","region":"emea"}`; `region` is optional. It returns `{"ok":true}` after validation and storage, or `{"ok":false,"error":"..."}` on failure. It never returns the token. The host accepts messages up to 64 KiB.
 
+## Proxy
+
+The CLI and native messaging host use Bun's proxy environment variables for Microsoft API requests, including token validation. Set `HTTPS_PROXY` for Teams HTTPS requests. Bun also supports `HTTP_PROXY` for HTTP requests, `ALL_PROXY` as a fallback, lowercase equivalents, and `NO_PROXY` to bypass the proxy for selected hosts.
+
+```bash
+export HTTPS_PROXY=http://proxy.example.com:8080
+export NO_PROXY=localhost,127.0.0.1,.example.internal
+teams-ic3 auth-status --check
+```
+
+HTTP and HTTPS proxy URLs can include credentials, for example `http://user:password@proxy.example.com:8080`. Treat these URLs as secrets. TLS certificate verification remains enabled; if your proxy intercepts TLS, configure the corporate CA with `NODE_EXTRA_CA_CERTS` rather than disabling verification.
+
+The native host inherits its environment from Edge, not from the shell that runs the CLI. Set the proxy and CA variables in Edge's launch environment as well if token validation requires the proxy. This support is tested with Bun 1.4.5.
+
 ## Build
 
 ```bash
